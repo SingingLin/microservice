@@ -1,0 +1,32 @@
+@import "../../assets/styles/variable";
+
+.header {
+  width: 100vw;
+  height: 3.5rem;
+  padding: 0 1rem;
+  background-color: #fff;
+  background: $color-main;
+  //   border-bottom: 2px solid #c7c4c4;
+  //   box-shadow: 5px 1px 20px #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__projname {
+    font-weight: bolder;
+    padding: 0.3rem;
+    color: #fff;
+    background: $color-main;
+  }
+
+  &__title {
+    // background-color: red;
+  }
+
+  &__user {
+    width: 2rem;
+    & img {
+      width: 100%;
+    }
+  }
+}
