@@ -2,19 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'assets/styles/reset.scss';
 import './index.scss';
-// import App from './App';
+import App from './App';
 import Header from 'containers/Header';
 import Left from './containers/Left';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
+    <Left />
     <Header />
-    <div style={{display: 'flex'}}>
-      <Left />
-      <div>body</div>
+    <div className="main-container-fluid">
+      <p>body</p>
+      <App />
     </div>
-    {/* <App /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

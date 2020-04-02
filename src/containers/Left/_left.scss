@@ -1,9 +1,11 @@
 @import "../../assets/styles/variable";
 
 .left__drawer {
-  max-width: 22vw;
-  min-width: 18vw;
-  height: calc(100vh - 3.5rem);
+  width: 260px;
+  position: fixed;
+  top: 60px;
+  z-index: 10000;
+  height: calc(100vh - 60px);
   padding: 1rem 0;
   box-shadow: 5px 1px 20px #e0e0e0;
   overflow-y: scroll;
@@ -22,6 +24,10 @@
     &--active {
       color: $color-main;
     }
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
