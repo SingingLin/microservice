@@ -1,15 +1,38 @@
 import React from 'react';
+import { HashRouter as Router, NavLink } from "react-router-dom";
 import './_left.scss';
 
 function Left() {
     return (
-        <div className="left__drawer">
-            <ul className="left__drawer__group">
-                <li className="left__drawer__group__item left__drawer__group__item--active"><span className="icon icon--monitoring"></span>Monitoring</li>
-                <li className="left__drawer__group__item"><span className="icon icon--deploy"></span>Deploy</li>
-                <li className="left__drawer__group__item"><span className="icon icon--upload"></span>Upload</li>
-            </ul>
-        </div>
+        <Router>
+            <div className="left__drawer">
+                <ul className="left__drawer__group">
+                    <NavLink exact activeClassName="left__drawer__group__item--active" to="/">
+                        <li className="left__drawer__group__item left__drawer__group__item--active">
+                            Home
+                        </li>
+                    </NavLink>
+                    <li className="left__drawer__group__item left__drawer__group__item--active">
+                        <span className="icon icon--monitoring"></span>
+                        <NavLink exact activeClassName="left__drawer__group__item--active" to="/monitoring">
+                            Monitoring
+                        </NavLink>
+                    </li>
+                    <li className="left__drawer__group__item">
+                        <span className="icon icon--deploy"></span>
+                        <NavLink exact activeClassName="left__drawer__group__item--active" to="/deploy">
+                            Deploy
+                        </NavLink>
+                    </li>
+                    <li className="left__drawer__group__item">
+                        <span className="icon icon--upload"></span>
+                        <NavLink exact activeClassName="left__drawer__group__item--active" to="/upload">
+                            Upload
+                        </NavLink>
+                    </li>
+                </ul>
+            </div>
+        </Router>
     );
 }
 

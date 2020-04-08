@@ -1,0 +1,14 @@
+.title-name {
+  text-align: center;
+  padding: 50px 0 0px 0;
+  background: #fff;
+
+  & h2 {
+    width: calc(100% - 200px);
+    margin: 0 auto;
+    font-size: 1.5rem;
+    word-spacing: 9px;
+    padding: 30px;
+    border-bottom: 2px solid #cdcdcd;
+  }
+}
