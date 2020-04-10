@@ -16,7 +16,7 @@ const deploymentRequest = axios.create({
 });
 // file upload相關的 api
 const filesRequest = axios.create({
-  baseURL: baseURL + '/files'
+  baseURL: 'http://localhost:8080/uploads/upload1'
 });
 
 // services相關的 api
@@ -43,5 +43,5 @@ export const apiDeployService = data => deploymentRequest.post('/', data);
         onUploadProgress: myUploadProgress(files[index])
       };
  */
-// export const apiUploadFileService = (form, config) => filesRequest.post('/', form, config);
-export const apiUploadFileService = (form) => filesRequest.post('/');
+export const apiUploadFileService = (form, config) => filesRequest.post('/', form, config);
+// export const apiUploadFileService = (form) => filesRequest.post('/');

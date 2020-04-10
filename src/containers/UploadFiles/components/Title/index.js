@@ -2,7 +2,7 @@ import React from 'react';
 
 const TitleComponent = () => (
     <div className={'title-name'}>
-        <h2>.jar, .war 檔案上傳</h2>
+        <h2>Upload your jar or war file</h2>
     </div>
 );
 

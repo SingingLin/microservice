@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 import uploadIcon from "assets/images/uploadIcon.png";
+import { Line } from 'rc-progress';
 
 const FileCardComponent = ({ files }) => (
     <div>
-        <h3>Uploading</h3>
+        {/* <h3>Uploading</h3> */}
         {renderFiles(files)}
     </div>
 );
@@ -19,10 +20,11 @@ function renderFiles(files) {
                             <div className={'upload-group__filelist__item__img'}><img src={`${uploadIcon}`} alt="uploadIcon" /></div>
                             <div className={'upload-group__filelist__item__info'}>
                                 <h3 className={'upload-group__filelist__item__info__file-name'}>{item.file.name}
-                                    <span>{item.file.size} bytes</span>
+
                                 </h3>
+                                <span>{item.file.size} bytes</span>
                                 <div className={'upload-group__filelist__item__info__message'}>
-                                    <p>{getUploadMsg(item.progressData, item)}</p>
+                                    <p className={'font-s'}>{getUploadMsg(item.progressData, item)}</p>
                                     {/* <EuiButtonIcon
                                         color={item.progressData == 100 ? 'success' : 'danger'}
                                         // onClick={() => this.cancelBtn()}
@@ -31,6 +33,7 @@ function renderFiles(files) {
                                         disabled={item.progressData == 100 ? true : false}
                                     /> */}
                                 </div>
+                                <Line percent={item.progressData} trailWidth="2" strokeWidth="2" strokeColor="#4bbcf4" prefixCls="upload-group__filelist__item__info" />
                                 {/* <EuiProgress value={item.progressData} max={100} color="primary" size="s" /> */}
                             </div>
                         </li>
@@ -38,12 +41,6 @@ function renderFiles(files) {
                     </Fragment>
                 ))}
             </ul>
-        );
-    } else {
-        return (
-            <p>
-                The files you selected
-            </p>
         );
     }
 }

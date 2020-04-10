@@ -1,6 +1,6 @@
 // import { apiUploadFileService } from "../routes/api";
 import { apiUploadFileService } from "middleware/api";
-// import axios from 'axios';
+import axios from 'axios';
 
 /*
  * action type
@@ -64,10 +64,11 @@ function getApiUploadFileService(form, file) {
             // }),
             onUploadProgress: myUploadProgress()
         };
+
         return apiUploadFileService(form, config)
             .then(res => {
                 console.log('upload file success: ', res)
-                dispatch(updateFileStatus(file.index, res.data.data))
+                dispatch(updateFileStatus(file.index, res.data))
             })
             .catch(error => {
                 console.log('upload file error: ', error)
@@ -86,7 +87,7 @@ export function fetchFiles(files) {
 
         for (var index = 0; index < files.length; index++) {
             let form = new FormData();
-            form.append("files", files[index].file);
+            form.append("file", files[index].file);
             dispatch(getApiUploadFileService(form, files[index]))
         }
     }

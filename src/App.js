@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 //挂载 Mock
-import './mock/upload_data.js'
+// import './mock/upload_data.js'
 
 function App() {
   return (

@@ -12,9 +12,9 @@ function Left() {
                             Home
                         </li>
                     </NavLink>
-                    <li className="left__drawer__group__item left__drawer__group__item--active">
-                        <span className="icon icon--monitoring"></span>
+                    <li className="left__drawer__group__item">
                         <NavLink exact activeClassName="left__drawer__group__item--active" to="/monitoring">
+                            <span className="icon icon--monitoring"></span>
                             Monitoring
                         </NavLink>
                     </li>

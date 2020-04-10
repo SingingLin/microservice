@@ -75,15 +75,16 @@ function files(state = [], action) {
             console.error('state: ', state)
             return state.map((file, index) => {
                 if (file.index === action.index) {
-                    if (action.status.success.length === 1) {
+                    // if (action.status.success.length === 1) {
                         return Object.assign({}, file, {
-                            status: action.status.success[0]
+                            status: action.status
+                            // status: action.status.success[0]
                         })
-                    } else {
-                        return Object.assign({}, file, {
-                            status: action.status.fail[0]
-                        })
-                    }
+                    // } else {
+                        // return Object.assign({}, file, {
+                            // status: action.status.fail[0]
+                        // })
+                    // }
                 }
                 return file
             })

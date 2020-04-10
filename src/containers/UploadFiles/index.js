@@ -14,13 +14,13 @@ export class UploadFiles extends React.Component {
                 <TitleComponent></TitleComponent>
 
                 <div className={'upload-group'}>
-                    
-                    <div className={'upload-group__filepicker'}>
-                        <SelectFiles></SelectFiles>
-                    </div>
 
                     <div className={'upload-group__filelist'}>
                         <UPloadFilesInfo></UPloadFilesInfo>
+                    </div>
+
+                    <div className={'upload-group__filepicker'}>
+                        <SelectFiles></SelectFiles>
                     </div>
 
                 </div>
