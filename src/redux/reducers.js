@@ -61,7 +61,6 @@ function files(state = [], action) {
 
         case UPDATE_PROGRESS_BAR_VALUE:
             return state.map((file, index) => {
-                console.log("UPDATE_PROGRESS_BAR_VALUE: ", file, index)
                 if (file.index === action.index) {
                     return Object.assign({}, file, {
                         progressData: action.percentCompleted
@@ -71,8 +70,6 @@ function files(state = [], action) {
             })
 
         case UPDATE_FILE_STATUS:
-            console.error('action: ', action)
-            console.error('state: ', state)
             return state.map((file, index) => {
                 if (file.index === action.index) {
                     // if (action.status.success.length === 1) {

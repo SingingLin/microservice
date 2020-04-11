@@ -1,6 +1,6 @@
 // import { apiUploadFileService } from "../routes/api";
 import { apiUploadFileService } from "middleware/api";
-import axios from 'axios';
+// import axios from 'axios';
 
 /*
  * action type

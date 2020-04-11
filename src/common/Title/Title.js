@@ -1,8 +1,9 @@
 import React from 'react';
+import "./_title.scss";
 
-const TitleComponent = () => (
+const TitleComponent = ({ titleName }) => (
     <div className={'title-name'}>
-        <h2>Upload your jar or war file</h2>
+        <h2>{titleName}</h2>
     </div>
 );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import TitleComponent from "./components/Title";
+import TitleComponent from "common/Title";
 import SelectFiles from "./SelectFiles";
 import UPloadFilesInfo from "./UploadFilesInfo";
 import "./_upload.scss";
@@ -11,18 +11,11 @@ export class UploadFiles extends React.Component {
     render() {
         return (
             <div>
-                <TitleComponent></TitleComponent>
+                <TitleComponent titleName={'Upload your jar or war file'}></TitleComponent>
 
                 <div className={'upload-group'}>
-
-                    <div className={'upload-group__filelist'}>
-                        <UPloadFilesInfo></UPloadFilesInfo>
-                    </div>
-
-                    <div className={'upload-group__filepicker'}>
-                        <SelectFiles></SelectFiles>
-                    </div>
-
+                    <UPloadFilesInfo></UPloadFilesInfo>
+                    <SelectFiles></SelectFiles>
                 </div>
             </div>
         );

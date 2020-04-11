@@ -8,8 +8,8 @@ import rootReducers from "redux/reducers";
 import 'assets/styles/reset.scss';
 import './index.scss';
 import App from './App';
-import Header from 'containers/Header';
-import Left from 'containers/Left';
+import Header from 'common/Header';
+import Left from 'common/Left';
 import { UploadFiles } from 'containers/UploadFiles';
 import * as serviceWorker from './serviceWorker';
 

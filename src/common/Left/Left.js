@@ -7,27 +7,22 @@ function Left() {
         <Router>
             <div className="left__drawer">
                 <ul className="left__drawer__group">
-                    <NavLink exact activeClassName="left__drawer__group__item--active" to="/">
-                        <li className="left__drawer__group__item left__drawer__group__item--active">
-                            Home
-                        </li>
-                    </NavLink>
                     <li className="left__drawer__group__item">
                         <NavLink exact activeClassName="left__drawer__group__item--active" to="/monitoring">
                             <span className="icon icon--monitoring"></span>
-                            Monitoring
+                            <p className={'font-s'}>Monitoring</p>
                         </NavLink>
                     </li>
                     <li className="left__drawer__group__item">
-                        <span className="icon icon--deploy"></span>
                         <NavLink exact activeClassName="left__drawer__group__item--active" to="/deploy">
-                            Deploy
+                            <span className="icon icon--deploy"></span>
+                            <p className={'font-s'}>Deploy</p>
                         </NavLink>
                     </li>
                     <li className="left__drawer__group__item">
-                        <span className="icon icon--upload"></span>
                         <NavLink exact activeClassName="left__drawer__group__item--active" to="/upload">
-                            Upload
+                            <span className="icon icon--upload"></span>
+                            <p className={'font-s'}>Upload</p>
                         </NavLink>
                     </li>
                 </ul>

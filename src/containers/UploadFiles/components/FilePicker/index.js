@@ -4,23 +4,24 @@ import Dropzone from 'react-dropzone';
 import uploadimg from 'assets/images/filepicker.svg';
 
 const FilePickerComponent = ({ onFileChange }) => (
-
-    <Dropzone
-        // accept="application/java-archive, .jar, .war"
-        onDrop={acceptedFiles => {
-            onFileChange(acceptedFiles);
-        }}>
-        {({ getRootProps, getInputProps }) => (
-            <div className={'upload-group__filepicker__dragarea'} {...getRootProps()}>
-                <input {...getInputProps()} />
-                <div className={'upload-group__filepicker__dragarea--img'}>
-                    <img src={uploadimg} alt="uploadimg" />
+    <div className={'upload-group__filepicker'}>
+        <Dropzone
+            accept="application/java-archive, .jar, .war"
+            onDrop={acceptedFiles => {
+                onFileChange(acceptedFiles);
+            }}>
+            {({ getRootProps, getInputProps }) => (
+                <div className={'upload-group__filepicker__dragarea'} {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <div className={'upload-group__filepicker__dragarea--img'}>
+                        <img src={uploadimg} alt="uploadimg" />
+                    </div>
+                    <p>Drag or drop some files here, or click to select files.</p>
                 </div>
-                <p>Drag or drop some files here, or click to select files.</p>
-            </div>
-        )}
-    </Dropzone>
-    
+            )}
+        </Dropzone>
+    </div>
+
 );
 
 FilePickerComponent.prototype = {

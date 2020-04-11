@@ -1,55 +1,56 @@
-import React, { Fragment } from 'react';
-import uploadIcon from "assets/images/uploadIcon.png";
+import React from 'react';
+import jarFileIcon from "assets/images/jar.svg";
+import warFileIcon from "assets/images/war.svg";
 import { Line } from 'rc-progress';
 
 const FileCardComponent = ({ files }) => (
-    <div>
-        {/* <h3>Uploading</h3> */}
+    <>
         {renderFiles(files)}
-    </div>
+    </>
 );
 
 
 function renderFiles(files) {
     if (files.length > 0) {
         return (
-            <ul>
-                {files.map((item, i) => (
-                    <Fragment>
-                        <li key={item.index} className={'upload-group__filelist__item ' + getErrorBg(item)}>
-                            <div className={'upload-group__filelist__item__img'}><img src={`${uploadIcon}`} alt="uploadIcon" /></div>
+            <div className={'upload-group__filelist'}>
+                <ul>
+                    {files.map((item, i) => (
+                        <li key={'1'} className={'upload-group__filelist__item ' + getErrorBg(item)}>
+                            <div className={'upload-group__filelist__item__img'}><img src={getFileImg(item.file.name)} alt="uploadIcon" /></div>
                             <div className={'upload-group__filelist__item__info'}>
-                                <h3 className={'upload-group__filelist__item__info__file-name'}>{item.file.name}
-
-                                </h3>
-                                <span>{item.file.size} bytes</span>
-                                <div className={'upload-group__filelist__item__info__message'}>
-                                    <p className={'font-s'}>{getUploadMsg(item.progressData, item)}</p>
-                                    {/* <EuiButtonIcon
+                                <h3 className={'upload-group__filelist__item__info__file-name'}>{item.file.name}</h3>
+                                {/* <div className={'upload-group__filelist__item__info__message'}> */}
+                                {/* <EuiButtonIcon
                                         color={item.progressData == 100 ? 'success' : 'danger'}
                                         // onClick={() => this.cancelBtn()}
                                         iconType={getIconType(item.progressData, item)}
                                         aria-label="Next"
                                         disabled={item.progressData == 100 ? true : false}
                                     /> */}
-                                </div>
-                                <Line percent={item.progressData} trailWidth="2" strokeWidth="2" strokeColor="#4bbcf4" prefixCls="upload-group__filelist__item__info" />
-                                {/* <EuiProgress value={item.progressData} max={100} color="primary" size="s" /> */}
+                                {/* </div> */}
+                                <Line prefixCls="upload-group__filelist__item__info" percent={item.progressData} trailWidth="2" strokeWidth="2" strokeColor="#48bdff" />
+                                <span>{item.file.size}bytes {getUploadMsg(item.progressData, item)}</span>
                             </div>
                         </li>
-                        <div className={'separation-line'}></div>
-                    </Fragment>
-                ))}
-            </ul>
+                    ))}
+                </ul>
+            </div>
         );
     }
 }
 
-
+function getFileImg(type) {
+    if (type.indexOf('jar') !== -1) {
+        return `${jarFileIcon}`;
+    } else {
+        return `${warFileIcon}`;
+    }
+}
 
 function getUploadMsg(progress, file) {
     if (progress < 100) {
-        return 'Uploading...';
+        return 'Uploading... ' + progress + '%';
     } else {
         let msg;
         if (file.hasOwnProperty('status')) {
@@ -71,7 +72,7 @@ function getErrorBg(file) {
         if (file.status.hasOwnProperty('errorMsg')) {
             className = 'upload-group__filelist__item--failed';
         } else {
-            className = '';
+            className = 'upload-group__filelist__item--success';
         }
     }
 
