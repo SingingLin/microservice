@@ -10,14 +10,14 @@ export class UploadFiles extends React.Component {
 
     render() {
         return (
-            <div>
-                <TitleComponent titleName={'Upload your jar or war file'}></TitleComponent>
+            <>
+                <TitleComponent titleName={'Upload your jar or war file'} />
 
                 <div className={'upload-group'}>
                     <UPloadFilesInfo></UPloadFilesInfo>
                     <SelectFiles></SelectFiles>
                 </div>
-            </div>
+            </>
         );
     }
 }

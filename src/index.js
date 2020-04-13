@@ -5,12 +5,13 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducers from "redux/reducers";
-import 'assets/styles/reset.scss';
+import 'assets/styles/_reset.scss';
 import './index.scss';
 import App from './App';
 import Header from 'common/Header';
 import Left from 'common/Left';
 import { UploadFiles } from 'containers/UploadFiles';
+import { Deploy } from "containers/Deploy";
 import * as serviceWorker from './serviceWorker';
 
 // const store = createStore(
@@ -38,6 +39,7 @@ ReactDOM.render(
               <p>body</p>
             </Route>
             <Route path="/app" component={App} />
+            <Route path="/deploy" component={Deploy} />
             <Route path="/upload" component={UploadFiles} />
             <Route render={() => { return <h1>404</h1> }} />
           </Switch>
