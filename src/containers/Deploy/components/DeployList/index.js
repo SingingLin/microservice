@@ -64,6 +64,27 @@ function renderTable() {
                                             <input placeholder='Instance count' />
                                         </li>
                                         <li>
+                                            <h4>部署政策</h4>
+                                            <div class="form-group">
+                                                <label class="radio--container">asd
+                                                    <input type="radio" checked name="radio" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="radio--container">asd
+                                                    <input type="radio" checked name="radio" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="radio--container">asd
+                                                    <input type="radio" checked name="radio" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="checkbox--container">aaaaa
+                                                    <input type="checkbox" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
                                             <h4>Version</h4>
                                             <p className={'font-xs'}>0.0.1-SNAPSHOT</p>
                                         </li>
