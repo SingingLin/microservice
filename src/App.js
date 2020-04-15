@@ -4,6 +4,7 @@ import './App.css';
 
 //挂载 Mock
 // import './mock/upload_data.js'
+// import './mock/deploy_data'
 
 function App() {
   return (

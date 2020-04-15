@@ -16,7 +16,8 @@ const deploymentRequest = axios.create({
 });
 // file upload相關的 api
 const filesRequest = axios.create({
-  baseURL: 'http://localhost:8080/uploads/upload1'
+  // baseURL: 'http://localhost:8080/uploads/upload1'
+  baseURL: ''
 });
 
 // services相關的 api

@@ -8,6 +8,7 @@ import {
     FILTER_MS_CONNECT_VALUE,
     FILTER_MS_CONNECT_OPTION,
     UPDATE_SOCKET_OF_MSDATA,
+    MODIFY_DATA,
     MsStatusFilters,
     MsConnectFilters
 } from "./actions";
@@ -73,14 +74,14 @@ function files(state = [], action) {
             return state.map((file, index) => {
                 if (file.index === action.index) {
                     // if (action.status.success.length === 1) {
-                        return Object.assign({}, file, {
-                            status: action.status
-                            // status: action.status.success[0]
-                        })
+                    return Object.assign({}, file, {
+                        status: action.status
+                        // status: action.status.success[0]
+                    })
                     // } else {
-                        // return Object.assign({}, file, {
-                            // status: action.status.fail[0]
-                        // })
+                    // return Object.assign({}, file, {
+                    // status: action.status.fail[0]
+                    // })
                     // }
                 }
                 return file
@@ -93,6 +94,33 @@ function files(state = [], action) {
 
 function msData(state = [], action) {
     switch (action.type) {
+        case MODIFY_DATA:
+            let newList = [];
+            let updateList = [];
+            action.data.forEach(_item => {
+                if (_item.deployment.length == 1
+                    && (_item.deployment[0].strategy == ''
+                        || _item.deployment[0].strategy == null
+                        || _item.deployment[0].strategy == ' ')) {
+                    newList.push({
+                        serviceName: _item.serviceName,
+                        serviceId: _item.serviceId,
+                        deployment: _item.deployment[0]
+                    })
+                } else if (_item.deployment.length > 1
+                    && (_item.deployment[_item.deployment.length - 1].strategy == ''
+                        || _item.deployment[_item.deployment.length - 1].strategy == null
+                        || _item.deployment[_item.deployment.length - 1].strategy == ' ')) {
+                    updateList.push({
+                        serviceName: _item.serviceName,
+                        serviceId: _item.serviceId,
+                        deployment: _item.deployment[_item.deployment.length - 1]
+                    })
+                }
+            })
+            return { newList, updateList };
+
+
         case UPDATE_SOCKET_OF_MSDATA:
             return action.data.map(_item => {
 

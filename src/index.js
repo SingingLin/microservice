@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducers from "redux/reducers";
-import 'assets/styles/_reset.scss';
 import './index.scss';
 import App from './App';
 import Header from 'common/Header';

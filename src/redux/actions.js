@@ -1,5 +1,5 @@
 // import { apiUploadFileService } from "../routes/api";
-import { apiUploadFileService } from "middleware/api";
+import { apiUploadFileService, apiGetServices } from "middleware/api";
 // import axios from 'axios';
 
 /*
@@ -15,6 +15,8 @@ export const FILTER_MS_CONNECT_VALUE = 'FILTER_MS_CONNECT_VALUE';
 export const FILTER_MS_CONNECT_OPTION = 'FILTER_MS_CONNECT_OPTION';
 
 export const UPDATE_SOCKET_OF_MSDATA = 'UPDATE_SOCKET_OF_MSDATA';
+
+export const MODIFY_DATA = 'MODIFY_DATA';
 
 /*
  * 其他常數
@@ -37,6 +39,9 @@ export const MsConnectFilters = {
  * action creator
  */
 
+/**
+ * upload 
+ */
 // send upload file api
 function getApiUploadFileService(form, file) {
     return (dispatch) => {
@@ -110,6 +115,34 @@ export function updateFileStatus(index, status) {
     }
 }
 
+/**
+ * deploy 
+ */
+// get service api
+export function getApiGetServices() {
+    return (dispatch) => {
+
+        return apiGetServices()
+            .then(res => {
+                console.log('apiGetServices success: ', res)
+                dispatch(modifyData(res.data.data))
+            })
+            .catch(error => {
+                console.log('apiGetServices error: ', error)
+                throw (error)
+            })
+    }
+}
+function modifyData(data) {
+    return {
+        type: MODIFY_DATA,
+        data
+    }
+}
+
+/**
+ * mointoring 
+ */
 export function filterMsName(name) {
     return {
         type: FILTER_MS_NAME,

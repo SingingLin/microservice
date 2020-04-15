@@ -1,5 +1,5 @@
 //使用Mock
-import Mock from 'mockjs'
+import Mock from 'mockjs';
 
 export default Mock.mock('/files/', 'post', {
     "statusCode": 200,
