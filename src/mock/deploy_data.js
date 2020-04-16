@@ -1378,12 +1378,12 @@ export default Mock.mock('/services/', 'get', {
                     "fileVersion": "0.0.1-SNAPSHOT",
                     "serviceVersion": "0.0.1",
                     "uploadedTime": "1580874014",
-                    "strategy": "scaling",
+                    "strategy": null,
                     "serviceOldVersion": "",
-                    "instancesCount": "-1",
+                    "instancesCount": null,
                     "port": "8002",
-                    "deployedTime": "1583888699642",
-                    "deployedStatus": "SUCCESS"
+                    "deployedTime": "null",
+                    "deployedStatus": "FAILURE"
                 }
             ],
             "instancesCount": 1,
@@ -1429,11 +1429,11 @@ export default Mock.mock('/services/', 'get', {
                     "fileVersion": "0.0.1-SNAPSHOT",
                     "serviceVersion": "0.0.1",
                     "uploadedTime": "1582786473",
-                    "strategy": "default",
+                    "strategy": null,
                     "serviceOldVersion": null,
-                    "instancesCount": "2",
-                    "port": "8019,8000",
-                    "deployedTime": "1583140255211",
+                    "instancesCount": null,
+                    "port": null,
+                    "deployedTime": "null",
                     "deployedStatus": "FAILURE"
                 }
             ],

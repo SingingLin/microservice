@@ -1,6 +1,4 @@
-// import { apiUploadFileService } from "../routes/api";
 import { apiUploadFileService, apiGetServices } from "middleware/api";
-// import axios from 'axios';
 
 /*
  * action type
@@ -16,7 +14,11 @@ export const FILTER_MS_CONNECT_OPTION = 'FILTER_MS_CONNECT_OPTION';
 
 export const UPDATE_SOCKET_OF_MSDATA = 'UPDATE_SOCKET_OF_MSDATA';
 
-export const MODIFY_DATA = 'MODIFY_DATA';
+export const MODIFY_DEPLOY_DATA = 'MODIFY_DEPLOY_DATA';
+export const DEPLOY_TAB = 'DEPLOY_TAB';
+export const UPDATE_DEPLOY_COLLAPSE_FLAG = 'UPDATE_DEPLOY_COLLAPSE_FLAG';
+export const UPDATE_DEPLOY_CHECK_FLAG = 'UPDATE_DEPLOY_CHECK_FLAG';
+export const UPDATE_DEPLOY_ALL_CHECK_FLAG = 'UPDATE_DEPLOY_ALL_CHECK_FLAG';
 
 /*
  * 其他常數
@@ -125,7 +127,7 @@ export function getApiGetServices() {
         return apiGetServices()
             .then(res => {
                 console.log('apiGetServices success: ', res)
-                dispatch(modifyData(res.data.data))
+                dispatch(modifyDeployData(res.data.data))
             })
             .catch(error => {
                 console.log('apiGetServices error: ', error)
@@ -133,10 +135,34 @@ export function getApiGetServices() {
             })
     }
 }
-function modifyData(data) {
+function modifyDeployData(data) {
     return {
-        type: MODIFY_DATA,
+        type: MODIFY_DEPLOY_DATA,
         data
+    }
+}
+export function deployTab(status) {
+    return {
+        type: DEPLOY_TAB,
+        status
+    }
+}
+export function updateDeployCollapseFlag(id) {
+    return {
+        type: UPDATE_DEPLOY_COLLAPSE_FLAG,
+        id
+    }
+}
+export function updateDeployCheckFlag(id) {
+    return {
+        type: UPDATE_DEPLOY_CHECK_FLAG,
+        id
+    }
+}
+export function updateDeployAllCheckFlag(flag) {
+    return {
+        type: UPDATE_DEPLOY_ALL_CHECK_FLAG,
+        flag
     }
 }
 

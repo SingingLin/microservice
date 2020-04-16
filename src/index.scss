@@ -274,8 +274,11 @@ img {
 .table-collapse {
   max-height: 0;
   overflow: hidden;
-  max-height: 500px;
   transition: max-height 0.8s ease-in-out;
+
+  &.active {
+    max-height: 600px;
+  }
 }
 
 @media only screen and (max-width: 767px) {

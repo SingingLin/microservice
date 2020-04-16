@@ -10,7 +10,7 @@ import App from './App';
 import Header from 'common/Header';
 import Left from 'common/Left';
 import { UploadFiles } from 'containers/UploadFiles';
-import { Deploy } from "containers/Deploy";
+import Deploy from "containers/Deploy";
 import * as serviceWorker from './serviceWorker';
 
 // const store = createStore(

@@ -8,7 +8,11 @@ import {
     FILTER_MS_CONNECT_VALUE,
     FILTER_MS_CONNECT_OPTION,
     UPDATE_SOCKET_OF_MSDATA,
-    MODIFY_DATA,
+    MODIFY_DEPLOY_DATA,
+    DEPLOY_TAB,
+    UPDATE_DEPLOY_COLLAPSE_FLAG,
+    UPDATE_DEPLOY_CHECK_FLAG,
+    UPDATE_DEPLOY_ALL_CHECK_FLAG,
     MsStatusFilters,
     MsConnectFilters
 } from "./actions";
@@ -92,35 +96,181 @@ function files(state = [], action) {
     }
 }
 
-function msData(state = [], action) {
+function deploy(state = { allList: {}, tab: 'n' }, action) {
     switch (action.type) {
-        case MODIFY_DATA:
-            let newList = [];
-            let updateList = [];
+        case MODIFY_DEPLOY_DATA:
+            let newObj = {
+                data: [],
+                allCheckFlag: false
+            };
+            let updateObj = {
+                data: [],
+                allCheckFlag: false
+            };
             action.data.forEach(_item => {
-                if (_item.deployment.length == 1
-                    && (_item.deployment[0].strategy == ''
-                        || _item.deployment[0].strategy == null
-                        || _item.deployment[0].strategy == ' ')) {
-                    newList.push({
+                if (_item.deployment.length === 1
+                    && (_item.deployment[0].strategy === ''
+                        || _item.deployment[0].strategy === null
+                        || _item.deployment[0].strategy === ' ')) {
+                    newObj.data.push({
                         serviceName: _item.serviceName,
                         serviceId: _item.serviceId,
-                        deployment: _item.deployment[0]
+                        deployment: _item.deployment[0],
+                        openFlag: false,
+                        checkFlag: false
                     })
                 } else if (_item.deployment.length > 1
-                    && (_item.deployment[_item.deployment.length - 1].strategy == ''
-                        || _item.deployment[_item.deployment.length - 1].strategy == null
-                        || _item.deployment[_item.deployment.length - 1].strategy == ' ')) {
-                    updateList.push({
+                    && (_item.deployment[_item.deployment.length - 1].strategy === ''
+                        || _item.deployment[_item.deployment.length - 1].strategy === null
+                        || _item.deployment[_item.deployment.length - 1].strategy === ' ')) {
+                    updateObj.data.push({
                         serviceName: _item.serviceName,
                         serviceId: _item.serviceId,
-                        deployment: _item.deployment[_item.deployment.length - 1]
+                        deployment: _item.deployment[_item.deployment.length - 1],
+                        openFlag: false,
+                        checkFlag: false
                     })
                 }
             })
-            return { newList, updateList };
+            return {
+                ...state,
+                allList: { newObj, updateObj }
+            };
+
+        case DEPLOY_TAB:
+            return {
+                ...state,
+                tab: action.status
+            };
+
+        case UPDATE_DEPLOY_COLLAPSE_FLAG:
+            return {
+                ...state,
+                allList: {
+                    newObj: {
+                        data: state.allList.newObj.data.map((_item) => {
+                            if (_item.serviceId === action.id) {
+                                return Object.assign({}, _item, {
+                                    openFlag: !_item.openFlag
+                                })
+                            }
+                            return _item;
+                        }),
+                        allCheckFlag: state.allList.newObj.allCheckFlag
+                    },
+                    updateObj: {
+                        data: state.allList.updateObj.data.map((_item) => {
+                            if (_item.serviceId === action.id) {
+                                return Object.assign({}, _item, {
+                                    openFlag: !_item.openFlag
+                                })
+                            }
+                            return _item;
+                        }),
+                        allCheckFlag: state.allList.updateObj.allCheckFlag
+                    }
+                }
+            }
+
+        case UPDATE_DEPLOY_CHECK_FLAG:
+            return {
+                ...state,
+                allList: {
+                    newObj: {
+                        data: state.allList.newObj.data.map((_item) => {
+                            if (_item.serviceId === action.id) {
+                                return Object.assign({}, _item, {
+                                    checkFlag: !_item.checkFlag
+                                })
+                            } else if (action.id === 'all') {
+                                return Object.assign({}, _item, {
+                                    checkFlag: !_item.checkFlag
+                                })
+                            }
+                            return _item;
+                        }),
+                        allCheckFlag: state.allList.newObj.allCheckFlag
+                    },
+                    updateObj: {
+                        data: state.allList.updateObj.data.map((_item) => {
+                            if (_item.serviceId === action.id) {
+                                return Object.assign({}, _item, {
+                                    checkFlag: !_item.checkFlag
+                                })
+                            }
+                            return _item;
+                        }),
+                        allCheckFlag: state.allList.updateObj.allCheckFlag
+                    }
+                },
+            }
+
+        case UPDATE_DEPLOY_ALL_CHECK_FLAG:
+            return {
+                ...state,
+                allList: {
+                    newObj: {
+                        data: state.allList.newObj.data.map(_item => {
+                            if (state.tab === 'n') {
+                                return Object.assign({}, _item, {
+                                    checkFlag: action.flag
+                                })
+                            }
+                            return _item;
+                        }),
+                        allCheckFlag: state.tab === 'n' && action.flag
+                    },
+                    updateObj: {
+                        data: state.allList.updateObj.data.map(_item => {
+                            if (state.tab === 'u') {
+                                return Object.assign({}, _item, {
+                                    checkFlag: action.flag
+                                })
+                            }
+                            return _item;
+
+                        }),
+                        allCheckFlag: state.tab === 'u' && action.flag
+                    }
+                }
+            }
+
+        // return {
+        // ...state,
+        // allList:
+        // return
+        // {
+        // ...state,
+        // allList: {
+        //     newObj: {
+        //         allCheckFlag: action.flag
+        //     }
+        // }
+        // return Object.assign({}, state.allList.newObj.allCheckFlag, {
+        //     // state.allList.newObj.allCheckFlag: action.flag
+        // })
+        // }
 
 
+        // }
+        //             return state.map((todo, index) => {
+        //                 if (index == action.index) {
+        //                     return Object.assign({}, todo, {
+        //                         completed: !todo.completed
+        //                     })
+        //                 }
+        //                 return todo
+        //             })
+        // }
+
+
+        default:
+            return state;
+    }
+}
+
+function msData(state = [], action) {
+    switch (action.type) {
         case UPDATE_SOCKET_OF_MSDATA:
             return action.data.map(_item => {
 
@@ -198,6 +348,7 @@ const rootReducers = combineReducers({
     // visibilityFilter,
     // todos
     files,
+    deploy,
     msData,
     filterOfMs
 })
