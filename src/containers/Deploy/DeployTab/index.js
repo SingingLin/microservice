@@ -3,11 +3,7 @@ import { connect } from "react-redux";
 import { deployTab } from "redux/actions";
 
 class DeployTab extends Component {
-
-    // constructor(props) {
-    //     super(props);
-    // }
-
+    
     render() {
         return (
             <ul className={'tab-group'}>

@@ -13,6 +13,7 @@ import {
     UPDATE_DEPLOY_COLLAPSE_FLAG,
     UPDATE_DEPLOY_CHECK_FLAG,
     UPDATE_DEPLOY_ALL_CHECK_FLAG,
+    UPDATE_DEPLOY_INSTANCES,
     MsStatusFilters,
     MsConnectFilters
 } from "./actions";
@@ -96,7 +97,7 @@ function files(state = [], action) {
     }
 }
 
-function deploy(state = { allList: {}, tab: 'n' }, action) {
+function deploy(state = { allList: {}, tab: 'n', reqData: [] }, action) {
     switch (action.type) {
         case MODIFY_DEPLOY_DATA:
             let newObj = {
@@ -209,7 +210,7 @@ function deploy(state = { allList: {}, tab: 'n' }, action) {
                         allCheckFlag:
                             updateCount === state.allList.updateObj.data.length ? true : false
                     }
-                },
+                }
             }
 
         case UPDATE_DEPLOY_ALL_CHECK_FLAG:
@@ -244,6 +245,46 @@ function deploy(state = { allList: {}, tab: 'n' }, action) {
                     }
                 }
             }
+
+        case UPDATE_DEPLOY_INSTANCES:
+            if (state.tab === 'n') {
+
+                let aaa = state.allList.newObj.data.map(_item => {
+                    if (_item.serviceId === action.serviceId) {
+                        _item.deployment.instancesCount = action.instancesCount
+                    }
+                    return _item;
+                })
+
+                return {
+                    ...state,
+                    allList: {
+                        newObj: {
+                            data: aaa,
+                            allCheckFlag: state.allList.newObj.allCheckFlag,
+                        },
+                        updateObj: state.allList.updateObj
+                    }
+                }
+            } else if (state.tab === 'u') {
+                let bbb = state.allList.updateObj.data.map(_item => {
+                    if (_item.serviceId === action.serviceId) {
+                        _item.deployment.instancesCount = action.instancesCount
+                    }
+                    return _item
+                })
+                return {
+                    ...state,
+                    allList: {
+                        newObj: state.allList.newObj,
+                        updateObj: {
+                            data: bbb,
+                            allCheckFlag: state.allList.updateObj.allCheckFlag,
+                        }
+                    }
+                }
+            }
+            return state;
 
         default:
             return state;

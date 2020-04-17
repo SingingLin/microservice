@@ -1,28 +1,33 @@
 import { connect } from "react-redux";
-import { updateDeployCollapseFlag, updateDeployCheckFlag, updateDeployAllCheckFlag } from "redux/actions";
+import { updateDeployCollapseFlag, updateDeployCheckFlag, updateDeployAllCheckFlag, updateDeployInstances } from "redux/actions";
 import DeployListComponent from "../components/DeployList";
 import 'mock/deploy_data';
+import 'mock/deployment_data';
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onCollapseFlagClick: (serviceId) => {
-            console.log('updateDeployCollapseFlag')
             dispatch(updateDeployCollapseFlag(serviceId))
         },
         onCheckFlagClick: (serviceId) => {
-            console.log('updateDeployCheckFlag')
             dispatch(updateDeployCheckFlag(serviceId))
         },
         onAllCheckClick: (flag) => {
             dispatch(updateDeployAllCheckFlag(flag))
+        },
+        onInstanceCountChange: (count, serviceId) => {
+            if (count !== undefined && count !== null) {
+                dispatch(updateDeployInstances(count, serviceId))
+            }
         }
     }
 }
 
 const mapStateToProps = (state) => {
-    console.log('DeployService state: ', state)
+    console.log('SelectDeployService state: ', state)
     return {
-        data: filterList(state.deploy)
+        data: filterList(state.deploy),
+        tab: state.deploy.tab
     }
 }
 
@@ -36,9 +41,9 @@ function filterList(data) {
     }
 }
 
-const DeployService = connect(
+const SelectDeployService = connect(
     mapStateToProps,
     mapDispatchToProps
 )(DeployListComponent)
 
-export default DeployService;
+export default SelectDeployService;

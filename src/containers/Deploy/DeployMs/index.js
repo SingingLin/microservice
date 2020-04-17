@@ -1,18 +1,34 @@
-import React from 'react';
 import { connect } from "react-redux";
-// import { deployTab } from "redux/actions";
-import DeployStrategy from "../components/DeployStrategy";
+import { fetchDeployApi } from "redux/actions";
+import DeployBtnComponent from "../components/DeployBtn";
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onTabClick: (status) => {
-//             dispatch(deployTab(status))
-//         }
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onBtnClick: () => {
+            dispatch(fetchDeployApi(reqData))
+        }
+    }
+}
+
+let reqData = [];
 
 const mapStateToProps = (state) => {
-    console.log('DeployService state: ', state)
+    if (Object.keys(state.deploy.allList).length !== 0) {
+        console.log('DeployMs: ', state.deploy)
+        reqData = [];
+        state.deploy.allList.newObj.data.forEach(_item => {
+            if (_item.checkFlag) {
+                reqData.push({
+                    "serviceId": _item.serviceId,
+                    "deploymentId": _item.deployment.deploymentId,
+                    "strategy": "default",
+                    "instancesCount": _item.deployment.instancesCount
+                })
+            }
+        })
+        console.log('reqData: ', reqData)
+    }
+
     return {
         count: filterList(state.deploy)
     }
@@ -42,7 +58,7 @@ function filterList(data) {
 
 const DeployMs = connect(
     mapStateToProps,
-    // mapDispatchToProps
-)(DeployStrategy)
+    mapDispatchToProps
+)(DeployBtnComponent)
 
 export default DeployMs;

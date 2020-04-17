@@ -1,4 +1,4 @@
-import { apiUploadFileService, apiGetServices } from "middleware/api";
+import { apiUploadFileService, apiGetServices, apiDeployService } from "middleware/api";
 
 /*
  * action type
@@ -19,6 +19,8 @@ export const DEPLOY_TAB = 'DEPLOY_TAB';
 export const UPDATE_DEPLOY_COLLAPSE_FLAG = 'UPDATE_DEPLOY_COLLAPSE_FLAG';
 export const UPDATE_DEPLOY_CHECK_FLAG = 'UPDATE_DEPLOY_CHECK_FLAG';
 export const UPDATE_DEPLOY_ALL_CHECK_FLAG = 'UPDATE_DEPLOY_ALL_CHECK_FLAG';
+export const UPDATE_DEPLOY_INSTANCES = 'UPDATE_DEPLOY_INSTANCES';
+export const FETCH_DEPLOY_API = 'FETCH_DEPLOY_API';
 
 /*
  * 其他常數
@@ -163,6 +165,35 @@ export function updateDeployAllCheckFlag(flag) {
     return {
         type: UPDATE_DEPLOY_ALL_CHECK_FLAG,
         flag
+    }
+}
+export function updateDeployInstances(instancesCount, serviceId) {
+    return {
+        type: UPDATE_DEPLOY_INSTANCES,
+        instancesCount,
+        serviceId
+    }
+}
+
+export function fetchDeployApi(reqData) {
+    console.log('reqData: ', reqData)
+    return (dispatch) => {
+        dispatch(postDeploy(reqData));
+    }
+}
+
+function postDeploy(reqData) {
+    return (dispatch) => {
+
+        return apiDeployService(reqData)
+            .then(res => {
+                console.log('apiDeployService success: ', res)
+                // dispatch(modifyDeployData(res.data.data))
+            })
+            .catch(error => {
+                console.log('apiDeployService error: ', error)
+                throw (error)
+            })
     }
 }
 
