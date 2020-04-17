@@ -173,26 +173,32 @@ function deploy(state = { allList: {}, tab: 'n' }, action) {
             }
 
         case UPDATE_DEPLOY_CHECK_FLAG:
+            let newCount = 0;
+            let updateCount = 0;
             return {
                 ...state,
                 allList: {
                     newObj: {
                         data: state.allList.newObj.data.map((_item) => {
+                            if ((_item.serviceId !== action.id && _item.checkFlag) || (_item.serviceId === action.id && !_item.checkFlag)) {
+                                newCount++;
+                            }
                             if (_item.serviceId === action.id) {
-                                return Object.assign({}, _item, {
-                                    checkFlag: !_item.checkFlag
-                                })
-                            } else if (action.id === 'all') {
                                 return Object.assign({}, _item, {
                                     checkFlag: !_item.checkFlag
                                 })
                             }
                             return _item;
+
                         }),
-                        allCheckFlag: state.allList.newObj.allCheckFlag
+                        allCheckFlag:
+                            newCount === state.allList.newObj.data.length ? true : false
                     },
                     updateObj: {
                         data: state.allList.updateObj.data.map((_item) => {
+                            if ((_item.serviceId !== action.id && _item.checkFlag) || (_item.serviceId === action.id && !_item.checkFlag)) {
+                                updateCount++;
+                            }
                             if (_item.serviceId === action.id) {
                                 return Object.assign({}, _item, {
                                     checkFlag: !_item.checkFlag
@@ -200,69 +206,44 @@ function deploy(state = { allList: {}, tab: 'n' }, action) {
                             }
                             return _item;
                         }),
-                        allCheckFlag: state.allList.updateObj.allCheckFlag
+                        allCheckFlag:
+                            updateCount === state.allList.updateObj.data.length ? true : false
                     }
                 },
             }
 
         case UPDATE_DEPLOY_ALL_CHECK_FLAG:
-            return {
-                ...state,
-                allList: {
-                    newObj: {
-                        data: state.allList.newObj.data.map(_item => {
-                            if (state.tab === 'n') {
+            if (state.tab === 'n') {
+                return {
+                    ...state,
+                    allList: {
+                        newObj: {
+                            data: state.allList.newObj.data.map(_item => {
                                 return Object.assign({}, _item, {
                                     checkFlag: action.flag
                                 })
-                            }
-                            return _item;
-                        }),
-                        allCheckFlag: state.tab === 'n' && action.flag
-                    },
-                    updateObj: {
-                        data: state.allList.updateObj.data.map(_item => {
-                            if (state.tab === 'u') {
+                            }),
+                            allCheckFlag: action.flag
+                        },
+                        updateObj: state.allList.updateObj
+                    }
+                }
+            } else if (state.tab === 'u') {
+                return {
+                    ...state,
+                    allList: {
+                        newObj: state.allList.newObj,
+                        updateObj: {
+                            data: state.allList.updateObj.data.map(_item => {
                                 return Object.assign({}, _item, {
                                     checkFlag: action.flag
                                 })
-                            }
-                            return _item;
-
-                        }),
-                        allCheckFlag: state.tab === 'u' && action.flag
+                            }),
+                            allCheckFlag: action.flag
+                        }
                     }
                 }
             }
-
-        // return {
-        // ...state,
-        // allList:
-        // return
-        // {
-        // ...state,
-        // allList: {
-        //     newObj: {
-        //         allCheckFlag: action.flag
-        //     }
-        // }
-        // return Object.assign({}, state.allList.newObj.allCheckFlag, {
-        //     // state.allList.newObj.allCheckFlag: action.flag
-        // })
-        // }
-
-
-        // }
-        //             return state.map((todo, index) => {
-        //                 if (index == action.index) {
-        //                     return Object.assign({}, todo, {
-        //                         completed: !todo.completed
-        //                     })
-        //                 }
-        //                 return todo
-        //             })
-        // }
-
 
         default:
             return state;

@@ -1,19 +1,13 @@
 import React from 'react';
 
-const DeployStrategyComponent = () => {
+const DeployStrategyComponent = ({ count }) => {
     return (
-        <div className={'drawer-bottom'}>
-            {renderTable()}
+        <div className={'drawer-bottom' + (count != 0 ? ' active' : '')}>
+            <div className={'basic-btn'}>
+                <p className={'font-s'}>部署{count}隻</p>
+            </div>
         </div>
     )
 };
-
-function renderTable() {
-    return (
-        <div className={'basic-btn'}>
-            <p className={'font-s'}>部署1隻</p>
-        </div>
-    )
-}
 
 export default DeployStrategyComponent;

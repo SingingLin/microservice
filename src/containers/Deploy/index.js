@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { getApiGetServices } from "redux/actions";
 import TitleComponent from "common/Title";
-// import DeployListComponent from "./components/DeployList";
-import DeployStrategyComponent from "./components/DeployStrategy";
 import DeployTab from "./DeployTab";
 import DeployService from "./DeployService";
+import DeployMs from "./DeployMs";
 import "./_deploy.scss";
 
 class Deploy extends Component {
@@ -28,7 +27,7 @@ class Deploy extends Component {
                         <div className={'basic-box-panel deploy-group__list__form'}>
                             <DeployTab />
                             <DeployService></DeployService>
-                            <DeployStrategyComponent></DeployStrategyComponent>
+                            <DeployMs />
                         </div>
                     </div>
                 </div>

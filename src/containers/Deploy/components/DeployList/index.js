@@ -27,6 +27,7 @@ function renderTable(onCollapseFlagClick, onCheckFlagClick, onAllCheckClick, dat
                                             <input type="checkbox" onChange={() => {
                                                 console.log('allcheck')
                                                 onAllCheckClick(!data.allCheckFlag)
+                                                // onCheckFlagClick('all')
                                             }} checked={data.allCheckFlag} />
                                             <div className={"checkmark"}></div>
                                         </div>

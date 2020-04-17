@@ -13,6 +13,7 @@
                 display: table;
                 clear: both;
             }
+
             .tab-group li a {
                 display: block;
                 text-decoration: none;
@@ -24,13 +25,15 @@
                 width: 50%;
                 text-align: center;
                 cursor: pointer;
-                -webkit-transition: 0.5s ease;
-                transition: 0.5s ease;
+                -webkit-transition: 0.2s ease;
+                transition: 0.2s ease;
             }
+
             .tab-group li a:hover {
                 background: #8ddcdb;
                 color: #ffffff;
             }
+
             .tab-group .active a {
                 background: #61c0bf;
                 color: #ffffff;
@@ -43,6 +46,7 @@
             .d-table-cell {
                 border: none;
             }
+
             ul {
                 padding: 10px 0;
 
@@ -52,25 +56,24 @@
             }
         }
     }
-    &__strategy {
-    }
+
+    &__strategy {}
 }
 
 .drawer-bottom {
     background: #fff;
     width: calc(100vw - 60px);
     position: fixed;
-    left: 0px;
-    bottom: 0;
+    bottom: -70px;
     left: 60px;
-    /* width: 100vw; */
     height: 70px;
-    /* z-index: 1000000000; */
-    transition: bottom 0.5s ease;
-    /* height: 0px; */
-    /* bottom: -70px; */
+    transition: bottom 0.2s ease;
     box-shadow: 0px -2px 2px -1px rgba(152, 162, 179, 0.3);
     display: flex;
     align-items: center;
     padding: 0 25px;
+
+    &.active {
+        bottom: 0px;
+    }
 }
